@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <p>Enter your choice: (r for Rock, p for Paper, s for Scissors)</p>
+    <input type="text" id="playerChoice" maxlength="1">
+    <button onclick="playGame()">Play</button>
+    <p id="result"></p>
+
+    <script>
+        function playGame() {
+            let playerInput = document.getElementById("playerChoice").value.toLowerCase();
+            let choices = {"r": 0, "p": 1, "s": 2};
+            let reverseChoices = {0: "Rock", 1: "Paper", 2: "Scissors"};
+
+            if (!(playerInput in choices)) {
+                document.getElementById("result").innerText = "Invalid choice! Please enter r, p, or s.";
+                return;
+            }
+
+            let player = choices[playerInput];
+            let computer = Math.floor(Math.random() * 3);
+
+            let resultText = `You chose ${reverseChoices[player]}\nComputer chose ${reverseChoices[computer]}\n`;
+
+            if (player === computer) {
+                resultText += "It's a draw!";
+            } else if (
+                (player === 0 && computer === 2) ||
+                (player === 1 && computer === 0) ||
+                (player === 2 && computer === 1)
+            ) {
+                resultText += "You win!";
+            } else {
+                resultText += "You lose!";
+            }
+
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
